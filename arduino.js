@@ -1,33 +1,43 @@
+// Init serial port
 var SerialPort = require('serialport');
-var port = new SerialPort('/');
+// Add text parser
+var ReadLine = SerialPort.parsers.Readline;
+// Listen to port
+var port = new SerialPort('/dev/cu.usbmodem1411', {
+  baud: 57600
+});
+// Init parser
+var parser = new ReadLine();
+// Pipe data to parser
+port.pipe(parser);
+
 var Arduino = function() {};
 
 Arduino.prototype.move = function(m) {
   return new Promise((resolve, reject) => {
     var degree = Math.round( m.angle.degree / 30 );
-    var speed = Math.round( m.distance ); // From 0 to 50
     var angle;
     // TODO: fix this terrible code
-    if (degree === 0)  { angle = 'pr' };
-    if (degree === 1)  { angle = 'sr' };
-    if (degree === 2)  { angle = 'sr' };
-    if (degree === 3)  { angle = 'ps' };
-    if (degree === 4)  { angle = 'sl' };
-    if (degree === 5)  { angle = 'sl' };
-    if (degree === 6)  { angle = 'pl' };
-    if (degree === 7)  { angle = 'bl' };
-    if (degree === 8)  { angle = 'bl' };
-    if (degree === 9)  { angle = 'pb' };
-    if (degree === 10) { angle = 'br' };
-    if (degree === 11) { angle = 'br' };
-    if (degree === 12) { angle = 'pr' };
+    // perhaps ( degree (not divided by 30) + 90 ) % 360
+    if (degree === 0)  { angle = 'a'; }
+    if (degree === 1)  { angle = 'b'; }
+    if (degree === 2)  { angle = 'b'; }
+    if (degree === 3)  { angle = 'c'; }
+    if (degree === 4)  { angle = 'd'; }
+    if (degree === 5)  { angle = 'd'; }
+    if (degree === 6)  { angle = 'e'; }
+    if (degree === 7)  { angle = 'f'; }
+    if (degree === 8)  { angle = 'f'; }
+    if (degree === 9)  { angle = 'g'; }
+    if (degree === 10) { angle = 'h'; }
+    if (degree === 11) { angle = 'h'; }
+    if (degree === 12) { angle = 'a'; }
 
-    // i.e. `move pr at 47`
-    var command = 'move ' + String(angle) + ' at ' + String(speed);
-    port.write(command, err => {
-      if (err) reject(err);
-      resolve(command);
-    });
+    // When there's data, log it
+    parser.on('data', console.log);
+    // Send angle as buffer to Arduino
+    port.write(Buffer.from(angle));
+
   });
 };
 

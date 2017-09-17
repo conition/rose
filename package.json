@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jasmine",
-    "start": "node server.js"
+    "start": "NODE_ENV=production node server.js"
   },
   "author": "penguoir <games@marash.net> (https://penguoir.github.io)",
   "license": "ISC",
