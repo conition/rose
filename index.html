@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>WebBot</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style id="biscuit"></style>
+    <style>
+      main {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+      }
+
+      footer {
+        position: absolute;
+        bottom: 0;
+        width: 100vw;
+        box-sizing: border-box;
+        padding: 24px;
+        background-color: #ddd;
+      }
+
+      footer span {
+        font-size: 12px;
+      }
+
+      footer a {
+        float: right;
+        margin-left: 0.7rem;
+        color: #0091ea;
+        font-size: 20px;
+        transition: color .1s ease;
+      }
+
+      footer a:hover {
+        color: #0277bd;
+      }
+    </style>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <main id="main">
+      
+    </main>
+    <footer>
+      <span>Hold click mouse / finger to create joystick that moves the robot.</span>
+      <a href="https://twitter.com/penguoir"><i class="fa fa-twitter"></i></a>
+      <a href="https://github.com/penguoir"><i class="fa fa-github"></i></a>
+      <a href="/about"><i class="fa fa-info"></i></a>
+    </footer>
+  
+    <script src="/socket.io/socket.io.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nipplejs/0.6.7/nipplejs.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script>
+      $.ajax({
+        url: 'https://raw.githubusercontent.com/penguoir/biscuit.css/master/biscuit.min.css',
+        method: 'get'
+      }).done(data => {
+        $('#biscuit').html(data);
+      })
+
+      var socket = io();
+
+      var manager = nipplejs.create({
+        zone: document.getElementById('main'),
+        color: '#e53935'
+      })
+
+      manager.on('move', (e, data) => {
+        socket.emit('move', data);
+      })
+    </script>
+  </body>
+</html>

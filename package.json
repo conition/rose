@@ -1,0 +1,22 @@
+{
+  "name": "robot",
+  "version": "0.0.0",
+  "description": "Control a real life robot from the web.",
+  "main": "server.js",
+  "scripts": {
+    "test": "jasmine",
+    "start": "node server.js"
+  },
+  "author": "penguoir <games@marash.net> (https://penguoir.github.io)",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^2.8.0",
+    "supertest": "^3.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "morgan": "^1.8.2",
+    "socket.io": "^2.0.3"
+  }
+}
