@@ -17,6 +17,7 @@
     "body-parser": "^1.18.1",
     "express": "^4.15.4",
     "morgan": "^1.8.2",
+    "serialport": "^5.0.0",
     "socket.io": "^2.0.3"
   }
 }

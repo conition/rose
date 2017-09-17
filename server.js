@@ -26,6 +26,7 @@ app.get('/about', (req, res) => {
 io.on('connection', socket => {
   socket.on('move', e => {
     arduino.move(e);
+    // TODO: error handling :(
   });
 });
 
