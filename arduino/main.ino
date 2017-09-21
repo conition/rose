@@ -10,28 +10,28 @@ void loop() {
     incomingByte = Serial.read();
     // TODO: remove switch statement
     switch (incomingByte) {
-      case 97:
+      case 'a':
         msg = "right";
         break;
-      case 98:
+      case 'b':
         msg = "top right";
         break;
-      case 99:
+      case 'c':
         msg = "top";
         break;
-      case 100:
+      case 'd':
         msg = "top left";
         break;
-      case 101:
+      case 'e':
         msg = "left";
         break;
-      case 102:
+      case 'f':
         msg = "bottom left";
         break;
-      case 103:
+      case 'g':
         msg = "bottom";
         break;
-      case 104:
+      case 'h':
         msg = "bottom right";
         break;
     }
